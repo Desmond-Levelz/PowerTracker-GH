@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerTracker GH</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="top-bar">
+    <div>
+        <h1>PowerTracker <span>GH</span></h1>
+        <p>Electricity outage information</p>
+    </div>
+
+<button class="notification" onclick="showAlerts()">🔔</button>
+
+</header>
+
+<main>
+
+<section id="homePage" class="page-section">
+    <div class="welcome">
+        <p>Welcome back 👋</p>
+        <h2>Stay informed about your power.</h2>
+        <p class="subtext">Check electricity status and outage information in your area.</p>
+    </div>
+
+    <div class="location-box">
+        <div>
+            <small>YOUR LOCATION</small>
+            <h3 id="userLocation">📍 Accra, Ghana</h3>
+        </div>
+        <button onclick="changeLocation()">Change</button>
+    </div>
+
+<div class="status-card">
+    <div class="status-top">
+        <span>⚡ CURRENT STATUS</span>
+        <span class="status-dot">● LIVE</span>
+    </div>
+
+    <h2 id="status">Power Available</h2>
+
+    <p id="statusMessage">
+        No active outage has been reported in your area.
+    </p>
+
+    <div class="status-time">
+        <span>Last updated</span>
+        <strong id="lastUpdated">Just now</strong>
+    </div>
+</div>    
+
+    <h3 class="section-title">Quick Actions</h3>
+
+    <div class="actions">
+        <button class="action-card" onclick="showSchedule()">
+            <b>⚡</b><strong>Outage Schedule</strong>
+            <small>View planned outages</small>
+        </button>
+
+        <button class="action-card" onclick="reportOutage()">
+            <b>📝</b><strong>Report Outage</strong>
+            <small>Report a power problem</small>
+        </button>
+
+        <button class="action-card" onclick="showHistory()">
+            <b>📊</b><strong>Outage History</strong>
+            <small>View your reports</small>
+        </button>
+
+        <button class="action-card" onclick="showAlerts()">
+            <b>🔔</b><strong>Alerts</strong>
+            <small>View notifications</small>
+        </button>
+    </div>
+
+    <div class="info-card">
+        <strong>📢 Stay Updated</strong>
+        <p>PowerTracker GH helps communities stay informed about electricity outages and restoration updates.</p>
+    </div>
+</section>
+
+<section id="schedulePage" class="page-section hidden">
+    <div class="page-header">
+        <button class="back-btn" onclick="goHome()">←</button>
+        <div>
+            <h2>Outage Schedule</h2>
+            <p class="subtext">Planned electricity interruptions</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <b>Today</b>
+        <p>📍 Accra Central</p>
+        <p>🕐 10:00 AM – 2:00 PM</p>
+        <small>PLANNED</small>
+    </div>
+
+    <div class="card">
+        <b>Tomorrow</b>
+        <p>📍 East Legon</p>
+        <p>🕐 9:00 AM – 1:00 PM</p>
+        <small>MAINTENANCE</small>
+    </div>
+</section>
+
+<section id="reportPage" class="page-section hidden">
+    <div class="page-header">
+        <button class="back-btn" onclick="goHome()">←</button>
+        <div>
+            <h2>Report Outage</h2>
+            <p class="subtext">Help us identify electricity problems</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <label>Location</label>
+        <input id="reportLocation" placeholder="e.g. Dansoman, Accra">
+
+        <label>Outage Type</label>
+        <select id="outageType">
+            <option value="">Select outage type</option>
+            <option>Power Outage</option>
+            <option>Low Voltage</option>
+            <option>Power Fluctuation</option>
+            <option>Other</option>
+        </select>
+
+        <label>Description</label>
+        <textarea id="reportDescription" rows="4"
+            placeholder="Briefly describe the problem..."></textarea>
+
+        <button class="submit-btn" onclick="submitReport()">
+            Submit Outage Report
+        </button>
+
+        <p id="reportMessage" class="report-message"></p>
+    </div>
+</section>
+
+<section id="outagesPage" class="page-section hidden">
+    <button class="back-button" onclick="goHome()">← Back</button>
+    <div class="page-header">
+        <div>
+            <h2>Current Outages</h2>
+            <p class="subtext">Latest reported outages</p>
+        </div>
+    </div>
+    <div id="outages">Loading outages...</div>
+</section>
+
+<section id="historyPage" class="page-section hidden">
+    <div class="page-header">
+        <button class="back-btn" onclick="goHome()">←</button>
+        <div>
+            <h2>Outage History</h2>
+            <p class="subtext">Your submitted reports</p>
+        </div>
+    </div>
+    <div id="historyList"></div>
+</section>
+
+<section id="alertsPage" class="page-section hidden">
+
+    <div class="page-header">
+        <button class="back-btn" onclick="goHome()">←</button>
+
+        <div>
+            <h2>Notifications</h2>
+            <p class="subtext">Electricity updates and alerts</p>
+        </div>
+    </div>
+
+    <div id="alertsList">
+        Loading alerts...
+    </div>
+
+</section>
+
+<section id="settingsPage" class="page-section hidden">
+    <div class="page-header">
+    <button class="back-btn" onclick="goHome()">←</button>
+
+    <div>
+        <h2>Settings</h2>
+        <p class="subtext">Manage your application</p>
+    </div>
+</div>
+
+<div class="schedule-card">
+    <h3>⚡ PowerTracker GH</h3>
+    <p>Location: <strong id="settingsLocation">Accra</strong></p>
+</div>
+
+<div class="schedule-card">
+    <strong>Notifications</strong>
+    <p>Power outage alerts are enabled.</p>
+</div>
+</section>
+
+</main>
+
+<nav class="bottom-nav">
+    <button onclick="goHome()">🏠<span>Home</span></button>
+    <button onclick="showOutages()">⚡<span>Outages</span></button>
+    <button onclick="showAlerts()">🔔<span>Alerts</span></button>
+    <button onclick="showSettings()">⚙️<span>Settings</span></button>
+</nav>
+
+<script src="script.js"></script>
+
+</body>
+</html>
