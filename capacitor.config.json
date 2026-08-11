@@ -1,0 +1,4 @@
+{ "appId": "com.powertrackergh.app", 
+"appName": "PowerTracker GH", 
+"webDir": "www", 
+"server": { "cleartext": true } }
