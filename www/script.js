@@ -1,4 +1,4 @@
-const API = "http://192.168.100.187:3000";
+const API = "https://powertracker-gh.onrender.com";
 console.log("POWERTRACKER API:", API);
 
 function show(id) {
